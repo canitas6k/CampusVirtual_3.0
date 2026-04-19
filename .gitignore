@@ -1,0 +1,124 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### Credenciales sensibles ###
+db.properties
+
+### Archivos de base de datos ###
+*.db
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Código archivado y papelera ###
+campus_old/
+trash/
+
+### Herramientas de asistencia y configuraciones de editor avanzadas ###
+# (No se versionan — son ajustes personales del entorno de desarrollo)
+.claude/
+.claude*
+.cursor/
+.cursorignore
+.cursorrules
+.aider*
+.continue/
+.copilot/
+.codeium/
+.codeiumignore
+.windsurf/
+.windsurfrules
+.zed/
+.tabnine/
+.codegpt/
+.codex/
+.gpt*
+.chatgpt/
+.openai/
+.anthropic/
+.sourcegraph/
+.cody/
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+COPILOT.md
+.github/copilot-instructions.md
+.junie/
+.roo/
+.kilocode/
+
+### Ficheros de prompts y notas de desarrollo ###
+*.prompt.md
+*.prompts.md
+prompts/
+.prompts/
+notes-dev/
+scratch/
+NOTES.md
+TODO.md
+NOTAS.md
+
+### Logs ###
+*.log
+logs/
+
+### Variables de entorno ###
+.env
+.env.*
+!.env.example
+
+### Certificados y claves ###
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+### Backups y temporales ###
+*.bak
+*.backup
+*.tmp
+*.swp
+*~
+
+### Uploads de usuarios (contenido sensible) ###
+uploads/
+spring-campus-web/uploads/
+
+### Documentación y entregables (no publicar) ###
+documentacion/
+
+### Backups de base de datos ###
+backup v.1/
+backup*/
+*.sql.bak

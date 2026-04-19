@@ -1,0 +1,74 @@
+/* ─── Sidebar / Menú lateral ─── */
+.sidebar-container {
+    -fx-background-color: #1E293B;
+    -fx-spacing: 0;
+}
+
+.logo-container {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #334155 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.logo-icon {
+    -fx-fill: #60A5FA;
+}
+
+.logo-text {
+    -fx-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.role-text {
+    -fx-fill: #94A3B8;
+    -fx-font-size: 12px;
+}
+
+.menu-container {
+    -fx-padding: 20 10 10 10;
+}
+
+.menu-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #CBD5E1;
+    -fx-font-size: 14px;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-alignment: CENTER-LEFT;
+    -fx-graphic-text-gap: 12;
+}
+
+.menu-btn .glyph-icon {
+    -fx-fill: #94A3B8;
+}
+
+.menu-btn:hover {
+    -fx-background-color: #334155;
+    -fx-text-fill: white;
+}
+
+.menu-btn:hover .glyph-icon {
+    -fx-fill: #60A5FA;
+}
+
+.bottom-container {
+    -fx-border-color: #334155 transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+}
+
+.logout-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #EF4444;
+    -fx-font-size: 13px;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.logout-btn .glyph-icon {
+    -fx-fill: #EF4444;
+}
+
+.logout-btn:hover {
+    -fx-background-color: rgba(239, 68, 68, 0.15);
+}

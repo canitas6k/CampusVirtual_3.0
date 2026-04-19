@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" stylesheets="@../../styles/content.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.campusvirtual.controller.student.StudentCourseDetailController">
+    <VBox spacing="15" styleClass="content-area">
+        <padding><Insets bottom="25" left="25" right="25" top="25"/></padding>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button fx:id="backBtn" text="← Volver" styleClass="btn-secondary"/>
+            <Label fx:id="courseTitleLabel" styleClass="page-title"/>
+        </HBox>
+        <Label fx:id="courseDescLabel" styleClass="page-subtitle"/>
+        <Accordion fx:id="unitAccordion" VBox.vgrow="ALWAYS"/>
+    </VBox>
+</ScrollPane>

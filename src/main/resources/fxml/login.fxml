@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="850.0" styleClass="login-container"
+            stylesheets="@../styles/login.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.campusvirtual.controller.LoginController">
+
+    <VBox alignment="CENTER" prefWidth="300.0" styleClass="login-sidebar"
+          AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
+        <FontAwesomeIconView glyphName="BANK" size="70" styleClass="sidebar-icon"/>
+        <Text styleClass="sidebar-title" text="Campus Virtual"/>
+        <Text styleClass="sidebar-subtitle" text="Accede a tu plataforma educativa"/>
+    </VBox>
+
+    <VBox alignment="CENTER" spacing="22" styleClass="login-form-container"
+          AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <padding><Insets left="50" right="50"/></padding>
+
+        <VBox alignment="CENTER_LEFT">
+            <Label styleClass="login-header" text="Bienvenido"/>
+            <Label styleClass="login-subheader" text="Inicia sesión para continuar"/>
+            <VBox.margin><Insets bottom="10"/></VBox.margin>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label styleClass="field-label" text="Selecciona tu cargo"/>
+            <ChoiceBox fx:id="roleChoiceBox" prefWidth="350" styleClass="custom-choice-box"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label styleClass="field-label" text="Usuario"/>
+            <TextField fx:id="usernameField" promptText="Ingresa tu usuario" styleClass="input-field"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label styleClass="field-label" text="Contraseña"/>
+            <PasswordField fx:id="passwordField" promptText="••••••••" styleClass="input-field"/>
+        </VBox>
+
+        <Button fx:id="loginBtn" mnemonicParsing="false" prefHeight="45" prefWidth="350"
+                styleClass="login-btn" text="Iniciar Sesión">
+            <VBox.margin><Insets top="15"/></VBox.margin>
+            <graphic><FontAwesomeIconView glyphName="SIGN_IN" size="18" styleClass="login-btn-icon"/></graphic>
+        </Button>
+
+        <Label fx:id="errorLabel" styleClass="error-label" text="" visible="false"
+               prefWidth="350" wrapText="true"/>
+    </VBox>
+</AnchorPane>

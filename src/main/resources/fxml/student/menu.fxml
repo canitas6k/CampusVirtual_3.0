@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefWidth="220" styleClass="sidebar-container" stylesheets="@../../styles/sidebar.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.campusvirtual.controller.student.StudentMenuController">
+
+    <VBox alignment="CENTER" prefHeight="100" spacing="8" styleClass="logo-container">
+        <padding><Insets top="20" bottom="20"/></padding>
+        <FontAwesomeIconView glyphName="BANK" size="30" styleClass="logo-icon"/>
+        <Text styleClass="logo-text" text="Campus Virtual"/>
+        <Text styleClass="role-text" text="Estudiante"/>
+    </VBox>
+
+    <VBox alignment="TOP_CENTER" spacing="8" styleClass="menu-container">
+        <padding><Insets top="15"/></padding>
+        <Button fx:id="dashboardBtn" text="Tablero" prefWidth="190" prefHeight="42"
+                alignment="BASELINE_LEFT" graphicTextGap="12">
+            <graphic><FontAwesomeIconView glyphName="DASHBOARD" size="16"/></graphic>
+            <styleClass><String fx:value="menu-btn"/></styleClass>
+        </Button>
+        <Button fx:id="coursesBtn" text="Asignaturas" prefWidth="190" prefHeight="42"
+                alignment="BASELINE_LEFT" graphicTextGap="12">
+            <graphic><FontAwesomeIconView glyphName="BOOK" size="16"/></graphic>
+            <styleClass><String fx:value="menu-btn"/></styleClass>
+        </Button>
+        <Button fx:id="tasksBtn" text="Tareas" prefWidth="190" prefHeight="42"
+                alignment="BASELINE_LEFT" graphicTextGap="12">
+            <graphic><FontAwesomeIconView glyphName="TASKS" size="16"/></graphic>
+            <styleClass><String fx:value="menu-btn"/></styleClass>
+        </Button>
+        <Button fx:id="historyBtn" text="Historial" prefWidth="190" prefHeight="42"
+                alignment="BASELINE_LEFT" graphicTextGap="12">
+            <graphic><FontAwesomeIconView glyphName="HISTORY" size="16"/></graphic>
+            <styleClass><String fx:value="menu-btn"/></styleClass>
+        </Button>
+        <Button fx:id="profileBtn" text="Perfil" prefWidth="190" prefHeight="42"
+                alignment="BASELINE_LEFT" graphicTextGap="12">
+            <graphic><FontAwesomeIconView glyphName="USER" size="16"/></graphic>
+            <styleClass><String fx:value="menu-btn"/></styleClass>
+        </Button>
+    </VBox>
+
+    <Region VBox.vgrow="ALWAYS"/>
+
+    <VBox alignment="CENTER" prefHeight="70" styleClass="bottom-container">
+        <padding><Insets bottom="15"/></padding>
+        <Button fx:id="logoutBtn" text="Cerrar Sesión" prefWidth="160"
+                styleClass="logout-btn" graphicTextGap="10">
+            <graphic><FontAwesomeIconView glyphName="SIGN_OUT" size="14"/></graphic>
+        </Button>
+    </VBox>
+</VBox>

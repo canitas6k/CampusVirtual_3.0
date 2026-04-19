@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" stylesheets="@../../styles/content.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.campusvirtual.controller.professor.ProfessorCoursesController">
+    <VBox spacing="15" styleClass="content-area">
+        <padding><Insets bottom="25" left="25" right="25" top="25"/></padding>
+        <Label text="Mis Asignaturas" styleClass="page-title"/>
+        <Label text="Gestiona tus cursos, unidades y materiales" styleClass="page-subtitle"/>
+        <VBox fx:id="courseCardsBox" spacing="12"/>
+    </VBox>
+</ScrollPane>

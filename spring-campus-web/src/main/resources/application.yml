@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: campus-virtual-web
+
+  # ─── Base de datos ────────────────────────────────────────────
+  datasource:
+    url: jdbc:mysql://localhost:3306/campus_virtual?useSSL=false&serverTimezone=Europe/Madrid&allowPublicKeyRetrieval=true
+    username: root
+    password: "root"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # ─── JPA / Hibernate ─────────────────────────────────────────
+  jpa:
+    hibernate:
+      ddl-auto: validate       # No modifica el esquema — la BD ya existe (schema.sql de Fase 2)
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+  # ─── Thymeleaf ────────────────────────────────────────────────
+  thymeleaf:
+    cache: false               # Desactivar caché en desarrollo
+    encoding: UTF-8
+    mode: HTML
+
+  # ─── Spring Security ──────────────────────────────────────────
+  security:
+    user:
+      name: _disabled          # Desactiva el usuario por defecto de Spring Boot
+
+# ─── Servidor ────────────────────────────────────────────────────
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  error:
+    whitelabel:
+      enabled: false
+
+# ─── Logging ─────────────────────────────────────────────────────
+logging:
+  level:
+    com.campusvirtual: INFO
+    org.springframework.security: WARN

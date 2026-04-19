@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Asignatura — Campus Virtual</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h2>Campus Virtual</h2>
+        <span class="sidebar-subtitle">Panel Web</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a th:href="@{/dashboard}" class="nav-link">
+            <span class="nav-icon">📊</span> Dashboard
+        </a>
+        <a th:href="@{/admin/users}" class="nav-link">
+            <span class="nav-icon">👥</span> Usuarios
+        </a>
+        <a th:href="@{/admin/courses}" class="nav-link active">
+            <span class="nav-icon">📚</span> Asignaturas
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <span class="user-name" sec:authentication="name"></span>
+        <form th:action="@{/logout}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <button type="submit" class="btn-logout">Cerrar sesión</button>
+        </form>
+    </div>
+</aside>
+
+<main class="main-content">
+    <header class="topbar">
+        <h1 class="page-title">Nueva Asignatura</h1>
+        <a th:href="@{/admin/courses}" class="btn btn-secondary">← Volver</a>
+    </header>
+
+    <div class="content-area">
+
+        <div th:if="${errorMsg}" class="alert alert-error" th:text="${errorMsg}"></div>
+
+        <div class="card form-card">
+            <form th:action="@{/admin/courses/new}" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+                <div class="form-group">
+                    <label for="name">Nombre de la asignatura *</label>
+                    <input type="text" id="name" name="name" class="form-control"
+                           placeholder="ej: Programación Orientada a Objetos" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" name="description" class="form-control"
+                              rows="4" placeholder="Descripción breve de la asignatura"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="professorId">Profesor responsable</label>
+                    <select id="professorId" name="professorId" class="form-control">
+                        <option value="">— Sin asignar —</option>
+                        <option th:each="prof : ${professors}"
+                                th:value="${prof.id}"
+                                th:text="${prof.fullName}">Profesor</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Crear asignatura</button>
+                    <a th:href="@{/admin/courses}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox fx:id="cellContainer" spacing="10" alignment="CENTER_LEFT"
+      styleClass="course-card" stylesheets="@../../../styles/content.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox HBox.hgrow="ALWAYS" spacing="4">
+        <Label fx:id="courseNameLabel" styleClass="course-name"/>
+        <Label fx:id="courseDescLabel" styleClass="course-description"/>
+    </VBox>
+    <Button fx:id="openBtn" text="Abrir" styleClass="course-open-btn"/>
+</HBox>

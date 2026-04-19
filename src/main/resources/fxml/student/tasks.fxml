@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" stylesheets="@../../styles/content.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.campusvirtual.controller.student.StudentTasksController">
+    <VBox spacing="15" styleClass="content-area">
+        <padding><Insets bottom="25" left="25" right="25" top="25"/></padding>
+        <Label text="Mis Tareas" styleClass="page-title"/>
+        <Label text="Tareas de todas tus asignaturas" styleClass="page-subtitle"/>
+        <TableView fx:id="tasksTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colCourse" text="Asignatura" prefWidth="150"/>
+                <TableColumn fx:id="colTitle" text="Tarea" prefWidth="200"/>
+                <TableColumn fx:id="colDeadline" text="Fecha límite" prefWidth="110"/>
+                <TableColumn fx:id="colStatus" text="Estado" prefWidth="100"/>
+                <TableColumn fx:id="colAction" text="Acción" prefWidth="120"/>
+            </columns>
+        </TableView>
+    </VBox>
+</ScrollPane>

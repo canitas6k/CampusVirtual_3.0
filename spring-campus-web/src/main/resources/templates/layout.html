@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} + ' — Campus Virtual'" >Campus Virtual</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body">
+
+<!-- Sidebar de navegación -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h2>Campus Virtual</h2>
+        <span class="sidebar-subtitle">Admin Web</span>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a th:href="@{/dashboard}"
+           th:classappend="${activePage == 'dashboard'} ? 'active'"
+           class="nav-link">
+            <span class="nav-icon">📊</span> Dashboard
+        </a>
+        <a th:href="@{/admin/users}"
+           th:classappend="${activePage == 'users'} ? 'active'"
+           class="nav-link">
+            <span class="nav-icon">👥</span> Usuarios
+        </a>
+        <a th:href="@{/admin/courses}"
+           th:classappend="${activePage == 'courses'} ? 'active'"
+           class="nav-link">
+            <span class="nav-icon">📚</span> Asignaturas
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <span sec:authentication="name" class="user-name"></span>
+        <form th:action="@{/logout}" method="post" style="display:inline">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <button type="submit" class="btn-logout">Cerrar sesión</button>
+        </form>
+    </div>
+</aside>
+
+<!-- Contenido principal -->
+<main class="main-content">
+    <header class="topbar">
+        <h1 class="page-title" th:text="${pageTitle}">Página</h1>
+    </header>
+
+    <div class="content-area">
+        <!-- Mensajes flash -->
+        <div th:if="${successMsg}" class="alert alert-success" th:text="${successMsg}"></div>
+        <div th:if="${errorMsg}"   class="alert alert-error"   th:text="${errorMsg}"></div>
+
+        <!-- Contenido de cada vista -->
+        <div th:replace="${content}">Contenido</div>
+    </div>
+</main>
+
+</body>
+</html>

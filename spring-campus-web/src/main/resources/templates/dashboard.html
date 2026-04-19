@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Campus Virtual</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h2>Campus Virtual</h2>
+        <span class="sidebar-subtitle">Panel Web</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a th:href="@{/dashboard}" class="nav-link active">
+            <span class="nav-icon">📊</span> Dashboard
+        </a>
+        <a th:href="@{/admin/users}" class="nav-link">
+            <span class="nav-icon">👥</span> Usuarios
+        </a>
+        <a th:href="@{/admin/courses}" class="nav-link">
+            <span class="nav-icon">📚</span> Asignaturas
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <span class="user-name" sec:authentication="name"></span>
+        <form th:action="@{/logout}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <button type="submit" class="btn-logout">Cerrar sesión</button>
+        </form>
+    </div>
+</aside>
+
+<!-- Contenido principal -->
+<main class="main-content">
+    <header class="topbar">
+        <h1 class="page-title">Dashboard</h1>
+        <span class="topbar-user">
+            Bienvenido, <strong th:text="${currentUser?.fullName} ?: 'Administrador'">Admin</strong>
+        </span>
+    </header>
+
+    <div class="content-area">
+
+        <!-- Tarjetas de métricas -->
+        <div class="stats-grid">
+
+            <div class="stat-card stat-blue">
+                <div class="stat-value" th:text="${stats.activeStudents}">0</div>
+                <div class="stat-label">Alumnos activos</div>
+                <div class="stat-sub" th:text="'Total: ' + ${stats.totalStudents}">Total: 0</div>
+            </div>
+
+            <div class="stat-card stat-green">
+                <div class="stat-value" th:text="${stats.activeProfessors}">0</div>
+                <div class="stat-label">Profesores activos</div>
+                <div class="stat-sub" th:text="'Total: ' + ${stats.totalProfessors}">Total: 0</div>
+            </div>
+
+            <div class="stat-card stat-purple">
+                <div class="stat-value" th:text="${stats.totalCourses}">0</div>
+                <div class="stat-label">Asignaturas</div>
+                <div class="stat-sub">en el sistema</div>
+            </div>
+
+            <div class="stat-card stat-orange">
+                <div class="stat-value" th:text="${stats.pendingSubmissions}">0</div>
+                <div class="stat-label">Entregas pendientes</div>
+                <div class="stat-sub">de calificar</div>
+            </div>
+
+        </div>
+
+        <!-- Accesos directos -->
+        <div class="quick-actions">
+            <h2 class="section-title">Acciones rápidas</h2>
+            <div class="action-grid">
+                <a th:href="@{/admin/users/new}" class="action-card">
+                    <span class="action-icon">➕</span>
+                    <span>Nuevo usuario</span>
+                </a>
+                <a th:href="@{/admin/users}" class="action-card">
+                    <span class="action-icon">👥</span>
+                    <span>Ver todos los usuarios</span>
+                </a>
+                <a th:href="@{/admin/courses/new}" class="action-card">
+                    <span class="action-icon">📖</span>
+                    <span>Nueva asignatura</span>
+                </a>
+                <a th:href="@{/admin/courses}" class="action-card">
+                    <span class="action-icon">📚</span>
+                    <span>Ver asignaturas</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+/* ─── Paleta de colores global ─── */
+/* Primario:   #2563EB (azul)    */
+/* Secundario: #059669 (verde)   */
+/* Peligro:    #DC2626 (rojo)    */
+/* Fondo:      #F1F5F9           */
+/* Sidebar:    #1E293B           */
+/* Texto:      #0F172A           */
+
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 14px;
+}

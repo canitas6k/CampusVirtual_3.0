@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${course.name} + ' — Campus Virtual'">Asignatura</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="app-body">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h2>Campus Virtual</h2>
+        <span class="sidebar-subtitle">Panel Web</span>
+    </div>
+    <nav class="sidebar-nav">
+        <a th:href="@{/dashboard}" class="nav-link">
+            <span class="nav-icon">📊</span> Dashboard
+        </a>
+        <a th:href="@{/admin/users}" class="nav-link">
+            <span class="nav-icon">👥</span> Usuarios
+        </a>
+        <a th:href="@{/admin/courses}" class="nav-link active">
+            <span class="nav-icon">📚</span> Asignaturas
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <span class="user-name" sec:authentication="name"></span>
+        <form th:action="@{/logout}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <button type="submit" class="btn-logout">Cerrar sesión</button>
+        </form>
+    </div>
+</aside>
+
+<main class="main-content">
+    <header class="topbar">
+        <h1 class="page-title" th:text="${course.name}">Asignatura</h1>
+        <a th:href="@{/admin/courses}" class="btn btn-secondary">← Volver</a>
+    </header>
+
+    <div class="content-area">
+
+        <div th:if="${successMsg}" class="alert alert-success" th:text="${successMsg}"></div>
+        <div th:if="${errorMsg}"   class="alert alert-error"   th:text="${errorMsg}"></div>
+
+        <!-- Info de la asignatura -->
+        <div class="card mb-4">
+            <h2 class="card-title">Información</h2>
+            <dl class="info-list">
+                <dt>Descripción</dt>
+                <dd th:text="${course.description} ?: '—'">Descripción</dd>
+                <dt>Profesor responsable</dt>
+                <dd th:text="${course.professor?.fullName} ?: '—'">Profesor</dd>
+            </dl>
+        </div>
+
+        <!-- Alumnos matriculados -->
+        <div class="card mb-4">
+            <h2 class="card-title">
+                Alumnos matriculados
+                <span class="badge badge-blue" th:text="${#lists.size(enrollments)}">0</span>
+            </h2>
+
+            <table class="table" th:if="${!#lists.isEmpty(enrollments)}">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Email</th>
+                        <th>Fecha matrícula</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="e : ${enrollments}">
+                        <td th:text="${e.student.fullName}">Alumno</td>
+                        <td th:text="${e.student.username}">usuario</td>
+                        <td th:text="${e.student.email} ?: '—'">email</td>
+                        <td th:text="${#temporals.format(e.enrolledAt, 'dd/MM/yyyy')}">fecha</td>
+                        <td>
+                            <form method="post"
+                                  th:action="@{/admin/courses/{id}/unenroll(id=${course.id})}"
+                                  onsubmit="return confirm('¿Desmatricular a este alumno?')">
+                                <input type="hidden" name="studentId" th:value="${e.student.id}">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                <button type="submit" class="btn btn-sm btn-danger">Desmatricular</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p th:if="${#lists.isEmpty(enrollments)}" class="text-muted">
+                No hay alumnos matriculados en esta asignatura.
+            </p>
+        </div>
+
+        <!-- Formulario de matriculación -->
+        <div class="card">
+            <h2 class="card-title">Matricular alumno</h2>
+            <form method="post"
+                  th:action="@{/admin/courses/{id}/enroll(id=${course.id})}"
+                  class="form-inline">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <select name="studentId" class="form-control" required>
+                    <option value="">— Selecciona un alumno —</option>
+                    <option th:each="s : ${allStudents}"
+                            th:value="${s.id}"
+                            th:text="${s.fullName} + ' (' + ${s.username} + ')'">Alumno</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Matricular</button>
+            </form>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>
