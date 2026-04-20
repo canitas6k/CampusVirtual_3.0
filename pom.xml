@@ -110,7 +110,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.campusvirtual/com.campusvirtual.App
+                                com.campusvirtual/com.campusvirtual.Launcher
                             </mainClass>
                             <launcher>campus-virtual</launcher>
                             <jlinkZipName>campus-virtual</jlinkZipName>
