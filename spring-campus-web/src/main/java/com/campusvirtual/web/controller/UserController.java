@@ -31,10 +31,12 @@ public class UserController {
     // ── Listado ───────────────────────────────────────────────────
 
     @GetMapping
-    public String listUsers(Model model, Principal principal) {
-        model.addAttribute("users", userService.findAll());
+    public String listUsers(@RequestParam(required = false) String search,
+                            Model model, Principal principal) {
+        model.addAttribute("users", userService.search(search));
         model.addAttribute("roles", Role.values());
         model.addAttribute("currentUsername", principal.getName());
+        model.addAttribute("search", search != null ? search : "");
         return "users/list";
     }
 

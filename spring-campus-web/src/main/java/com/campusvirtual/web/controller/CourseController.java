@@ -25,8 +25,9 @@ public class CourseController {
     // ── Listado ───────────────────────────────────────────────────
 
     @GetMapping
-    public String listCourses(Model model) {
-        model.addAttribute("courses", courseService.findAll());
+    public String listCourses(@RequestParam(required = false) String search, Model model) {
+        model.addAttribute("courses", courseService.search(search));
+        model.addAttribute("search", search != null ? search : "");
         return "courses/list";
     }
 

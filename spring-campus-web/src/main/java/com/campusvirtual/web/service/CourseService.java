@@ -89,4 +89,10 @@ public class CourseService {
         Course course = courseRepo.findById(courseId).orElseThrow();
         enrollmentRepo.deleteByStudentAndCourse(student, course);
     }
+
+    @Transactional(readOnly = true)
+    public List<Course> search(String q) {
+        if (q == null || q.isBlank()) return findAll();
+        return courseRepo.searchCourses(q.trim());
+    }
 }

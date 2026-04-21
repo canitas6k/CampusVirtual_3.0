@@ -137,6 +137,12 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; color: v
 
 .topbar-user { font-size: 14px; color: var(--text-muted); }
 
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .content-area {
     padding: 32px;
     flex: 1;

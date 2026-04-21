@@ -6,6 +6,8 @@ import com.campusvirtual.model.User;
 import com.campusvirtual.model.enums.AccountType;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -28,6 +30,9 @@ public class UserManagementController implements Initializable {
     @FXML private Button createUserBtn;
     @FXML private Label userMessageLabel;
 
+    @FXML private TextField searchField;
+    @FXML private Button clearSearchBtn;
+
     @FXML private TableView<User> usersTable;
     @FXML private TableColumn<User, String> colId;
     @FXML private TableColumn<User, String> colUsername;
@@ -38,15 +43,49 @@ public class UserManagementController implements Initializable {
     @FXML private TableColumn<User, String> colAction;
     @FXML private TableColumn<User, String> colDelete;
 
+    /** Lista maestra (todos los usuarios cargados de BD). */
+    private ObservableList<User> allUsers = FXCollections.observableArrayList();
+    /** Vista filtrada que alimenta la tabla. */
+    private FilteredList<User> filteredUsers;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         roleChoice.setItems(FXCollections.observableArrayList(
                 AccountType.STUDENT, AccountType.PROFESSOR, AccountType.ADMIN));
         roleChoice.setValue(AccountType.STUDENT);
 
+        // Inicializar la FilteredList vinculada a la lista maestra
+        filteredUsers = new FilteredList<>(allUsers, u -> true);
+        usersTable.setItems(filteredUsers);
+
+        // Filtrar en tiempo real mientras el admin escribe
+        searchField.textProperty().addListener((obs, oldVal, newVal) -> applyFilter(newVal));
+
+        // Botón ✕ limpia el campo y restaura todos los usuarios
+        clearSearchBtn.setOnAction(e -> searchField.clear());
+
         createUserBtn.setOnAction(e -> createUser());
         setupTable();
         loadUsers();
+    }
+
+    /**
+     * Aplica el predicado de búsqueda sobre la FilteredList.
+     * Compara (ignorando mayúsculas) contra: username, nombre completo, email y rol.
+     */
+    private void applyFilter(String query) {
+        if (query == null || query.isBlank()) {
+            filteredUsers.setPredicate(u -> true);
+            return;
+        }
+        String lower = query.toLowerCase().trim();
+        filteredUsers.setPredicate(u -> {
+            if (u.getUsername() != null && u.getUsername().toLowerCase().contains(lower)) return true;
+            if (u.getFullName() != null && u.getFullName().toLowerCase().contains(lower)) return true;
+            if (u.getEmail() != null && u.getEmail().toLowerCase().contains(lower)) return true;
+            if (u.getRoleText() != null && u.getRoleText().toLowerCase().contains(lower)) return true;
+            return false;
+        });
     }
 
     private void createUser() {
@@ -168,7 +207,9 @@ public class UserManagementController implements Initializable {
 
     private void loadUsers() {
         List<User> users = AppState.getInstance().getUserDao().findAll();
-        usersTable.setItems(FXCollections.observableArrayList(users));
+        allUsers.setAll(users);
+        // Reaplicar el filtro actual tras recargar (por ejemplo, tras crear/eliminar)
+        applyFilter(searchField.getText());
     }
 
     private void showMessage(String msg, boolean isError) {

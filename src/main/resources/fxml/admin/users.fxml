@@ -29,6 +29,19 @@
             </HBox>
         </VBox>
 
+        <!-- Barra de búsqueda -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Buscar:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <TextField fx:id="searchField"
+                       promptText="Usuario, nombre, email o rol..."
+                       styleClass="form-field"
+                       HBox.hgrow="ALWAYS"/>
+            <Button fx:id="clearSearchBtn" text="✕"
+                    style="-fx-background-color: #6B7280; -fx-text-fill: white;
+                           -fx-background-radius: 6; -fx-padding: 5 10;
+                           -fx-font-size: 13px; -fx-cursor: hand;"/>
+        </HBox>
+
         <!-- Tabla de usuarios -->
         <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
             <columns>

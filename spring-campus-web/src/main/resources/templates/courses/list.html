@@ -38,7 +38,17 @@
 <main class="main-content">
     <header class="topbar">
         <h1 class="page-title">Gestión de Asignaturas</h1>
-        <a th:href="@{/admin/courses/new}" class="btn btn-primary">+ Nueva asignatura</a>
+        <div class="topbar-actions">
+            <form class="form-inline" method="get" th:action="@{/admin/courses}">
+                <input type="search" name="search" class="form-control"
+                       placeholder="Buscar por nombre, descripción o profesor..."
+                       th:value="${search}">
+                <button type="submit" class="btn btn-secondary">Buscar</button>
+                <a th:if="${!#strings.isEmpty(search)}" th:href="@{/admin/courses}"
+                   class="btn btn-secondary">✕</a>
+            </form>
+            <a th:href="@{/admin/courses/new}" class="btn btn-primary">+ Nueva asignatura</a>
+        </div>
     </header>
 
     <div class="content-area">

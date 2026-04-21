@@ -119,4 +119,10 @@ public class UserService {
     public boolean usernameExists(String username) {
         return userRepo.findByUsername(username).isPresent();
     }
+
+    @Transactional(readOnly = true)
+    public List<User> search(String q) {
+        if (q == null || q.isBlank()) return findAll();
+        return userRepo.searchUsers(q.trim());
+    }
 }

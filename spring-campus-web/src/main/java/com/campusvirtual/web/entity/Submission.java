@@ -2,6 +2,7 @@ package com.campusvirtual.web.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -35,7 +36,7 @@ public class Submission {
     private String studentComment;
 
     @Column(name = "grade", precision = 4, scale = 2)
-    private Double grade;
+    private BigDecimal grade;
 
     @Column(name = "professor_comment", columnDefinition = "TEXT")
     private String professorComment;
@@ -66,8 +67,8 @@ public class Submission {
     public String getStudentComment() { return studentComment; }
     public void setStudentComment(String studentComment) { this.studentComment = studentComment; }
 
-    public Double getGrade() { return grade; }
-    public void setGrade(Double grade) { this.grade = grade; }
+    public BigDecimal getGrade() { return grade; }
+    public void setGrade(BigDecimal grade) { this.grade = grade; }
 
     public String getProfessorComment() { return professorComment; }
     public void setProfessorComment(String professorComment) { this.professorComment = professorComment; }

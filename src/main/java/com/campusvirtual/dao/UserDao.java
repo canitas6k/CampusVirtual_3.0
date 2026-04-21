@@ -34,6 +34,38 @@ public class UserDao {
     }
 
     /**
+     * Busca usuarios cuyo username, nombre, apellido o email contengan la cadena dada.
+     * La comparación es insensible a mayúsculas/minúsculas.
+     *
+     * @param query cadena de búsqueda (se aplica LIKE %query%)
+     * @return lista de usuarios que coinciden con el criterio
+     */
+    public List<User> search(String query) {
+        String like = "%" + query.toLowerCase() + "%";
+        String sql = "SELECT * FROM users WHERE " +
+                     "LOWER(username) LIKE ? OR " +
+                     "LOWER(first_name) LIKE ? OR " +
+                     "LOWER(last_name) LIKE ? OR " +
+                     "LOWER(COALESCE(email,'')) LIKE ? " +
+                     "ORDER BY role, last_name";
+        List<User> users = new ArrayList<>();
+        try (PreparedStatement ps = DatabaseConfig.getConnection().prepareStatement(sql)) {
+            ps.setString(1, like);
+            ps.setString(2, like);
+            ps.setString(3, like);
+            ps.setString(4, like);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    users.add(mapRow(rs));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en UserDao.search: " + e.getMessage());
+        }
+        return users;
+    }
+
+    /**
      * Obtiene todos los usuarios del sistema (para panel de administración).
      */
     public List<User> findAll() {
